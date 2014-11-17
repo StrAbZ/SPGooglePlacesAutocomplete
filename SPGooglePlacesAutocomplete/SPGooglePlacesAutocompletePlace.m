@@ -10,8 +10,8 @@
 #import "SPGooglePlacesPlaceDetailQuery.h"
 
 @interface SPGooglePlacesAutocompletePlace()
-@property (nonatomic, retain, readwrite) NSString *name;
-@property (nonatomic, retain, readwrite) NSString *identifier;
+@property (nonatomic, strong, readwrite) NSString *name;
+@property (nonatomic, strong, readwrite) NSString *identifier;
 @property (nonatomic, readwrite) SPGooglePlacesAutocompletePlaceType type;
 @end
 
@@ -20,7 +20,7 @@
 @synthesize name, identifier, type;
 
 + (SPGooglePlacesAutocompletePlace *)placeFromDictionary:(NSDictionary *)placeDictionary {
-    SPGooglePlacesAutocompletePlace *place = [[[self alloc] init] autorelease];
+    SPGooglePlacesAutocompletePlace *place = [[self alloc] init];
     place.name = [placeDictionary objectForKey:@"description"];
     place.identifier = [placeDictionary objectForKey:@"place_id"];
     place.type = SPPlaceTypeFromDictionary(placeDictionary);
@@ -79,11 +79,5 @@
     }
 }
 
-- (void)dealloc {
-    [name release];
-    [identifier release];
-    [geocoder release];
-    [super dealloc];
-}
 
 @end
