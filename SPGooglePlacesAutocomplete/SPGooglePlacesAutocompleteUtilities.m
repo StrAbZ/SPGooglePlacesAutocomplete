@@ -23,7 +23,15 @@ NSString *SPBooleanStringForBool(BOOL boolean) {
 }
 
 NSString *SPPlaceTypeStringForPlaceType(SPGooglePlacesAutocompletePlaceType type) {
-    return (type == SPPlaceTypeGeocode) ? @"geocode" : @"establishment";
+    if (type == SPPlaceTypeGeocode) {
+        return @"geocode";
+    }
+    else if (type == SPPlaceTypeEstablishment) {
+        return @"establishment";
+    }
+    else {
+        return nil;
+    }
 }
 
 BOOL SPEnsureGoogleAPIKey() {
